@@ -1,0 +1,24 @@
+{
+  "name": "koltsova/freshdesk",
+  "description": "Freshdesk",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Kate Koltsova",
+      "email": "kate.petronyuk@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": "^7.4",
+    "guzzlehttp/guzzle": "^7.2",
+    "vlucas/phpdotenv": "^5.6",
+    "league/csv": "9.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Koltsova\\Freshdesk\\": "app"
+    }
+  }
+}
