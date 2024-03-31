@@ -15,8 +15,16 @@ services:
     image: php:7.4-fpm-alpine
     volumes:
       - ./:/var/www/Freshdesk
-    command: /bin/sh -c "docker-php-ext-install mysqli pdo pdo_mysql && php-fpm"
-
+    command: /bin/sh -c "apk add --no-cache $PHPIZE_DEPS \
+      && apk add --no-cache autoconf g++ make \
+      && pecl install xdebug-2.9.8 \
+      && docker-php-ext-enable xdebug \
+      && docker-php-ext-install mysqli pdo pdo_mysql \
+      && echo 'zend_extension=xdebug.so' >> /usr/local/etc/php/php.ini \
+      && echo 'xdebug.mode=debug' >> /usr/local/etc/php/php.ini \
+      && echo 'xdebug.start_with_request=yes' >> /usr/local/etc/php/php.ini \
+      && echo 'xdebug.client_host=host.docker.internal' >> /usr/local/etc/php/php.ini \
+      && php-fpm"
 
   composer:
     image: composer
